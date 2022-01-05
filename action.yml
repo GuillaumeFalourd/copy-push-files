@@ -77,7 +77,7 @@ runs:
             cd "$CLONE_DIRECTORY"
 
             # Create new branch
-            REMOTE_URL=https://$DESTINATION_OWNER:${{ inputs.access_token }}@github.com/$DESTINATION_OWNER/$DESTINATION_REPOSITORY.git
+            REMOTE_URL=https://$DESTINATION_OWNER:${{ inputs.access_token }}@github.com/$DESTINATION_OWNER/$DESTINATION_REPOSITORY
             git remote set-url origin $REMOTE_URL
             git fetch origin
             git checkout -b ${{ inputs.target_branch }}
