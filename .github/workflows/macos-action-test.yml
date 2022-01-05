@@ -1,0 +1,34 @@
+name: Action test on MacOS
+
+on:
+  schedule:
+    - cron: "0 2 * * MON-FRI" # Runs at 02:00 UTC
+  push:
+  workflow_dispatch:
+
+jobs:
+  macos-minimal:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v2.3.4
+      - run: date > macos_report_minimal.txt
+      - uses: GuillaumeFalourd/copy-push-files@main
+        with:
+          source_files: macos_report_minimal.txt
+          remote_repository: https://github.com/GuillaumeFalourd/poc-github-actions
+          access_token: ${{ secrets.ACCESS_TOKEN }}
+
+  macos-full:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v2.3.4
+      - run: date > macos_report_full.txt
+      - uses: GuillaumeFalourd/copy-push-files@main
+        with:
+          email: ${{ github.actor }}[bot]@users.noreply.github.com
+          name: ${{ github.actor }}
+          commit_message: macos full workflow
+          target_branch: copy-push-files-macos
+          source_files: macos_report_full.txt
+          remote_repository: https://github.com/GuillaumeFalourd/poc-github-actions
+          access_token: ${{ secrets.ACCESS_TOKEN }}
