@@ -1,6 +1,6 @@
 # Contribution
 
-You're welcome to add new Github formulas to the repository.
+You're welcome to contribute to the repository.
 
 ## New features for the project
 
@@ -13,8 +13,6 @@ according to the following guide:
 
 ## Guidelines
 
-- Open one Pull Request for each new formula.
+- Open one Pull Request for each issue.
 
-- Implement new formulas using Github API with Python 3.
-
-- Update the formula README file with pictures and description in ENGLISH.
+- Use English for communication and implementation
