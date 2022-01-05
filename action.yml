@@ -43,9 +43,10 @@ runs:
 
     - name: Copy contents from current repository to destination Github repository
       run: |
+        bash --version
         REGEX="^(https|git)(:\/\/|@)([^\/:]+)[\/:]([^\/:]+)\/(.+).git$"
 
-        if [[ ${{ inputs.remote_repository }} == $REGEX ]]  && echo matched ; then
+        if [[ ${{ inputs.remote_repository }} =~ $REGEX ]]; then
             PROTOCOL=${BASH_REMATCH[1]}
             SEPARATOR=${BASH_REMATCH[2]}
             HOSTNAME=${BASH_REMATCH[3]}
