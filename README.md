@@ -25,6 +25,9 @@ _**Note**: This action is supported on **all runners** operating systems (`ubunt
       - uses: actions/checkout@v2.3.4
       # [...] --> steps with actions or commands updating repository files
       - uses: GuillaumeFalourd/copy-push-files@v1
+        with:
+          remote_repository: https://github.com/<owner>/<repo>
+          access_token: ${{ secrets.ACCESS_TOKEN }}
 ```
 
 ### `2️⃣ Full`: Commit and Push with `customized` parameters
@@ -40,8 +43,8 @@ _**Note**: This action is supported on **all runners** operating systems (`ubunt
           commit_message: your_message
           target_branch: branch_name
           source_files: file1 file2 directory1 directory2/file3
-          remote_repository: https://github.com/<owner>/<repo> # public repository
-          access_token: ${{ github.token }} # need PAT if private repo
+          remote_repository: https://github.com/<owner>/<repo>
+          access_token: ${{ secrets.ACCESS_TOKEN }}
 ```
 
 * * *
@@ -53,11 +56,11 @@ Field | Mandatory | Default Value | Observation
 **email** | NO | `${{ github.actor }}@users.noreply.github.com` | Github user email <br/> _e.g: `octocat@github.com`_
 **name** | NO | `${{ github.actor }}` | Github username <br/> _e.g: `octocat`_
 **commit_message** | NO | `Commit performed using Copy and Push Files action` | Commit message
-**target_branch** | YES | `copy-push-files-branch` | Branch to push the contents on the other repository
-**target_dir** | YES | `repository root` | Directory to push the contents on the other repository
-**source_files** | YES | `.` | Files to add separated by space <br/> _e.g: `file1 file2 directory1 directory2/file3`_
+**target_branch** | NO | `copy-push-files-branch` | Branch to push the contents on the other repository
+**target_dir** | NO | `repository root` | Directory to push the contents on the other repository
+**source_files** | NO | `.` | Files to add separated by space <br/> _e.g: `file1 file2 directory1 directory2/file3`_
 **remote_repository** | YES | N/A | Repository url to push the code <br/> _e.g: `https://github.com/<owner>/<repo>`_
-**access_token** | NO | `${{ github.token }}` | [Personal Access Token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token) is necessary if push to another repository
+**access_token** | YES | N/A | [Personal Access Token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token) is necessary to push to another repository
 
 * * *
 
