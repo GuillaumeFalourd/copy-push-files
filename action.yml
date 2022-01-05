@@ -86,11 +86,11 @@ runs:
           echo "WARNING: Couldn't read remote_repository URL input.
           echo
           echo "ACCEPTED FORMAT:"
-          echo `git://github.com/<owner>/<repo>.git`
-          echo `or`
-          echo `git@github.com:<owner>/<repo>.git`
-          echo `or`
-          echo `https://github.com/<owner>/<repo>`
+          echo "git://github.com/owner/repo.git"
+          echo "or"
+          echo "git@github.com:owner/repo.git"
+          echo "or"
+          echo "https://github.com/owner/repo"
           return 1
         fi
       shell: bash
