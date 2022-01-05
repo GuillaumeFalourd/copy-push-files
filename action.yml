@@ -1,0 +1,99 @@
+name: 'Copy Push Files action'
+
+description: 'GitHub Action to copy & push contents (files / directory) from a repository to another :octocat:'
+
+inputs:
+  email:
+    description: Committer's email address
+    required: true
+    default: ${{ github.actor }}@users.noreply.github.com
+  name:
+    description: Committer's username
+    required: true
+    default: ${{ github.actor }}
+  source_files:
+    description: Files or directories to add separated by space
+    required: true
+    default: .
+  commit_message:
+    description: Commit message
+    required: true
+    default: Commit performed using Copy Push Files action
+  target_branch:
+    description: Branch to push the contents to
+    required: true
+    default: 'copy-push-files-branch'
+  target_dir:
+    description: Directory to push the contents to on the new repository
+    required: true
+  remote_repository:
+    description: Repository url to push the code to
+    required: true
+    default: origin
+  access_token:
+    description: Token used to push the code
+    required: true
+    default: ${{ github.token }}
+
+runs:
+  using: "composite"
+  steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2.3.4
+
+    - name: Copy contents from current repository to destination Github repository
+      run: |
+        re="^(https|git)(:\/\/|@)([^\/:]+)[\/:]([^\/:]+)\/(.+).git$"
+
+        if [[ ${{ inputs.remote_repository }} =~ $re ]]; then
+            PROTOCOL=${BASH_REMATCH[1]}
+            SEPARATOR=${BASH_REMATCH[2]}
+            HOSTNAME=${BASH_REMATCH[3]}
+            DESTINATION_OWNER=${BASH_REMATCH[4]}
+            DESTINATION_REPOSITORY=${BASH_REMATCH[5]}
+
+            CLONE_DIRECTORY=$(mktemp -d)
+
+            echo "##### Cloning destination Github repository #####"
+            # Setup git
+            git config --global user.email "${{ inputs.email }}"
+            git config --global user.name "${{ inputs.name }}"
+            git clone --single-branch --branch "${{ inputs.target_branch }}" "https://${{ inputs.access_token }}@github.com/$DESTINATION_OWNER/$DESTINATION_REPOSITORY.git" "$CLONE_DIRECTORY"
+            ls -la "$CLONE_DIRECTORY"
+
+            echo
+            echo "##### Copying contents to destination Github repository #####"
+            if [ -z "${{ inputs.target_dir }}" ]; then
+              cp -rvf "${{ inputs.source_files }}" "$CLONE_DIRECTORY"
+            else
+              mkdir -p "$CLONE_DIRECTORY/${{ inputs.target_dir }}"
+              cp -rvf "${{ inputs.source_files }}" "$CLONE_DIRECTORY/${{ inputs.target_dir }}"
+            fi
+
+            cd "$CLONE_DIRECTORY"
+            git add .
+            git status
+
+            # Won't commit if no changes were made
+            git diff-index --quiet HEAD || git commit --message "${{ inputs.commit_message }}"
+
+            echo
+            echo "##### Pushing git commit #####"
+            # --set-upstream: sets the branch when pushing to a branch that does not exist
+            git push origin --set-upstream "${{ inputs.target_branch }}"
+
+        else
+          echo "WARNING: Couldn't read remote_repository URL input.
+          echo
+          echo "ACCEPTED FORMAT:"
+          echo "git://github.com/owner/repo-name.git
+          echo "or"
+          echo "git@github.com:owner/repo-name.git"
+          echo "or"
+          echo "https://github.com/owner/repo-name.git"
+        fi
+      shell: bash
+
+branding:
+    icon: 'git-commit'
+    color: 'black'
