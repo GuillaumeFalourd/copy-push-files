@@ -58,7 +58,7 @@ Field | Mandatory | Default Value | Observation
 **commit_message** | NO | `Commit performed using Copy and Push Files action` | Commit message
 **target_branch** | NO | `copy-push-files-branch` | Branch to push the contents on the other repository
 **target_dir** | NO | `repository root` | Directory to push the contents on the other repository
-**source_files** | NO | `.` | Files to add separated by space <br/> _e.g: `file1 file2 directory1 directory2/file3`_
+**source_files** | YES | N/A  | Files to add separated by space <br/> _e.g: `file1 file2 directory1 directory2/file3`_
 **remote_repository** | YES | N/A | Repository url to push the code <br/> _e.g: `https://github.com/<owner>/<repo>`_
 **access_token** | YES | N/A | [Personal Access Token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token) is necessary to push to another repository
 

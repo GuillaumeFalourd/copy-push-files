@@ -14,7 +14,6 @@ inputs:
   source_files:
     description: Files or directories to add separated by space
     required: true
-    default: .
   commit_message:
     description: Commit message
     required: true
@@ -79,8 +78,7 @@ runs:
             # Create new branch
             REMOTE_URL=https://$DESTINATION_OWNER:${{ inputs.access_token }}@github.com/$DESTINATION_OWNER/$DESTINATION_REPOSITORY
             git remote set-url origin $REMOTE_URL
-            git fetch --unshallow origin
-            git fetch --depth=10000
+            git fetch origin
             git checkout -b ${{ inputs.target_branch }}
             git add .
             git status
