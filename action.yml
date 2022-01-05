@@ -90,7 +90,7 @@ runs:
             echo
             echo "##### Pushing git commit #####"
             # --set-upstream: sets the branch when pushing to a branch that does not exist
-            git push -f $REMOTE_URL "${{ inputs.target_branch }}"
+            git push -f -u origin "${{ inputs.target_branch }}"
 
         else
           echo
