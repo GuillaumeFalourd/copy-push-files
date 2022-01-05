@@ -40,7 +40,7 @@ runs:
     - name: Copy contents from current repository to destination Github repository
       run: |
 
-        if [ -z "${{ inputs.qccess_token }}" ]; then
+        if [ -z "${{ inputs.access_token }}" ]; then
           echo "WARNING: The access_token input is mandatory to push files to another repository."
           exit 1
         fi
