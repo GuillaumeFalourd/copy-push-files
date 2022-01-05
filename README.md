@@ -4,6 +4,8 @@
 
 [![Security Pipeline](https://github.com/GuillaumeFalourd/copy-push-files/actions/workflows/security-pipeline.yml/badge.svg)](https://github.com/GuillaumeFalourd/copy-push-files/actions/workflows/security-pipeline.yml) [![Gitleaks](https://github.com/GuillaumeFalourd/copy-push-files/actions/workflows/gitleaks.yml/badge.svg)](https://github.com/GuillaumeFalourd/copy-push-files/actions/workflows/gitleaks.yml)
 
+![](https://user-images.githubusercontent.com/22433243/148292745-102e17fe-9277-46e9-ab52-468be5cf3240.png)
+
 ☞ GitHub Action to copy & push contents (files / directory) from a repository to another :octocat:
 
 _**Note**: This action is supported on **all runners** operating systems (`ubuntu`, `macos`, `windows`)_
