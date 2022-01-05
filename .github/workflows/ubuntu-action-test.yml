@@ -9,7 +9,7 @@ on:
 jobs:
   ubuntu-minimal:
     runs-on: ubuntu-latest
-    if: github.event_name != 'push'
+#    if: github.event_name != 'push'
     steps:
       - uses: actions/checkout@v2.3.4
       - run: date > ubuntu_report_minimal.txt
@@ -30,14 +30,5 @@ jobs:
           commit_message: ubuntu full workflow
           target_branch: copy-push-files-ubuntu
           source_files: ubuntu_report_full.txt
-          remote_repository: https://github.com/GuillaumeFalourd/poc-github-actions
-          access_token: ${{ secrets.ACCESS_TOKEN }}
-
-  ubuntu-nochanges:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2.3.4
-      - uses: GuillaumeFalourd/copy-push-files@main
-        with:
           remote_repository: https://github.com/GuillaumeFalourd/poc-github-actions
           access_token: ${{ secrets.ACCESS_TOKEN }}
