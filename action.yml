@@ -91,7 +91,7 @@ runs:
           echo "git@github.com:owner/repo.git"
           echo "or"
           echo "https://github.com/owner/repo"
-          return 1
+          exit 1
         fi
       shell: bash
 
