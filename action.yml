@@ -76,7 +76,7 @@ runs:
             cd "$CLONE_DIRECTORY"
 
             # Create new branch
-            git remote set-url origin https://$DESTINATION_OWNER:${{ inputs.access_token }}@github.com/$DESTINATION_OWNER/$DESTINATION_REPOSITORY.git
+            git remote set-url origin https://$DESTINATION_OWNER:${{ inputs.access_token }}@github.com/$DESTINATION_OWNER/$DESTINATION_REPOSITORY
             git checkout -b ${{ inputs.target_branch }}
             git add .
             git status
@@ -87,7 +87,7 @@ runs:
             echo
             echo "##### Pushing git commit #####"
             # --set-upstream: sets the branch when pushing to a branch that does not exist
-            git push origin --set-upstream "${{ inputs.target_branch }}"
+            git push -f origin --set-upstream "${{ inputs.target_branch }}"
 
         else
           echo
