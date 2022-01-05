@@ -1,0 +1,34 @@
+name: Action test on Windows
+
+on:
+  schedule:
+    - cron: "0 2 * * MON-FRI" # Runs at 02:00 UTC
+  push:
+  workflow_dispatch:
+
+jobs:
+  windows-minimal:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v2.3.4
+      - run: date > windows_report_minimal.txt
+      - uses: GuillaumeFalourd/copy-push-files@main
+        with:
+          source_files: windows_report_minimal.txt
+          remote_repository: https://github.com/GuillaumeFalourd/poc-github-actions
+          access_token: ${{ secrets.ACCESS_TOKEN }}
+
+  windows-full:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v2.3.4
+      - run: date > windows_report_full.txt
+      - uses: GuillaumeFalourd/copy-push-files@main
+        with:
+          email: ${{ github.actor }}[bot]@users.noreply.github.com
+          name: ${{ github.actor }}
+          commit_message: windows full workflow
+          target_branch: copy-push-files-windows
+          source_files: windows_report_full.txt
+          remote_repository: https://github.com/GuillaumeFalourd/poc-github-actions
+          access_token: ${{ secrets.ACCESS_TOKEN }}
