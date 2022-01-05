@@ -45,7 +45,7 @@ runs:
       run: |
         REGEX="^(https|git)(:\/\/|@)([^\/:]+)[\/:]([^\/:]+)\/(.+).git$"
 
-        if [[ "${{ inputs.remote_repository }}" =~ $REGEX ]]; then
+        if [[ ${{ inputs.remote_repository }} == $REGEX ]]  && echo matched ; then
             PROTOCOL=${BASH_REMATCH[1]}
             SEPARATOR=${BASH_REMATCH[2]}
             HOSTNAME=${BASH_REMATCH[3]}
