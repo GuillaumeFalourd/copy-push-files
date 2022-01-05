@@ -40,7 +40,7 @@ runs:
   steps:
     - name: Copy contents from current repository to destination Github repository
       run: |
-        REGEX="^(https|git)(:\/\/|@)([^\/:]+)[\/:]([^\/:]+)\/(.+).git$"
+        REGEX="^(https|git)(:\/\/|@)([^\/:]+)[\/:]([^\/:]+)\/(.+)$"
 
         if [[ ${{ inputs.remote_repository }} =~ $REGEX ]]; then
             PROTOCOL=${BASH_REMATCH[1]}
@@ -48,6 +48,7 @@ runs:
             HOSTNAME=${BASH_REMATCH[3]}
             DESTINATION_OWNER=${BASH_REMATCH[4]}
             DESTINATION_REPOSITORY=${BASH_REMATCH[5]}
+            DESTINATION_REPOSITORY=${DESTINATION_REPOSITORY//.git/ }
 
             CLONE_DIRECTORY=$(mktemp -d)
 
@@ -86,6 +87,8 @@ runs:
           echo "git://github.com/<owner>/<repo>.git"
           echo "or"
           echo "git@github.com:<owner>/<repo>.git"
+          echo "or"
+          echo "https://github.com/<owner>/<repo>.git"
           echo "or"
           echo "https://github.com/<owner>/<repo>"
           exit 1
