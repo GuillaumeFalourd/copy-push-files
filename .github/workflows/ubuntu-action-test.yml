@@ -27,7 +27,7 @@ jobs:
           commit_message: ubuntu full workflow
           target_branch: copy-push-files-ubuntu
           source_files: ubuntu_report_full.txt
-          remote_repository: https://github.com/GuillaumeFalourd/poc-github-actions # public repository
+          remote_repository: 'https://github.com/GuillaumeFalourd/poc-github-actions'
           access_token: ${{ github.token }}
 
   ubuntu-nochanges:

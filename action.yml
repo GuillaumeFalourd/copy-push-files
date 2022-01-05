@@ -83,15 +83,15 @@ runs:
             git push origin --set-upstream "${{ inputs.target_branch }}"
 
         else
-          echo "WARNING: Couldn't read remote_repository URL input."
           echo
+          echo "WARNING: Couldn't read remote_repository URL input."
           echo "ACCEPTED FORMAT:"
           echo "git://github.com/<owner>/<repo>.git"
           echo "or"
           echo "git@github.com:<owner>/<repo>.git"
           echo "or"
           echo "https://github.com/<owner>/<repo>"
-          return 1
+          exit 1
         fi
       shell: bash
 
