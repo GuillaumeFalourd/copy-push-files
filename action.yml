@@ -62,7 +62,6 @@ runs:
             git config --global user.email "${{ inputs.email }}"
             git config --global user.name "${{ inputs.name }}"
             git config -l | grep 'http\..*\.extraheader' | cut -d= -f1 | xargs -L1 git config --unset-all
-            git config --local --add receive.shallowUpdate true
             git clone "https://${{ inputs.access_token }}@github.com/$DESTINATION_OWNER/$DESTINATION_REPOSITORY.git" "$CLONE_DIRECTORY"
             ls -la "$CLONE_DIRECTORY"
 
@@ -80,7 +79,7 @@ runs:
             # Create new branch
             REMOTE_URL=https://$DESTINATION_OWNER:${{ inputs.access_token }}@github.com/$DESTINATION_OWNER/$DESTINATION_REPOSITORY
             git remote set-url origin $REMOTE_URL
-            git fetch origin
+            git fetch --unshallow origin
             git checkout -b ${{ inputs.target_branch }}
             git add .
             git status
