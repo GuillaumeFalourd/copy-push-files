@@ -1,10 +1,10 @@
 # Copy & Push Files action
 
-[![Security Pipeline](https://github.com/GuillaumeFalourd/copy-push-files/actions/workflows/security_pipeline.yml/badge.svg)](https://github.com/GuillaumeFalourd/copy-push-files/actions/workflows/security_pipeline.yml) [![Super Linter](https://github.com/GuillaumeFalourd/copy-push-files/actions/workflows/super-linter.yml/badge.svg)](https://github.com/GuillaumeFalourd/copy-push-files/actions/workflows/super-linter.yml) [![Gitleaks](https://github.com/GuillaumeFalourd/copy-push-files/actions/workflows/gitleaks.yml/badge.svg)](https://github.com/GuillaumeFalourd/copy-push-files/actions/workflows/gitleaks.yml)
+[![Security Pipeline](https://github.com/GuillaumeFalourd/copy-push-files/actions/workflows/security-pipeline.yml/badge.svg)](https://github.com/GuillaumeFalourd/copy-push-files/actions/workflows/security-pipeline.yml) [![Gitleaks](https://github.com/GuillaumeFalourd/copy-push-files/actions/workflows/gitleaks.yml/badge.svg)](https://github.com/GuillaumeFalourd/copy-push-files/actions/workflows/gitleaks.yml)
 
 [![Action test on Ubuntu](https://github.com/GuillaumeFalourd/copy-push-files/actions/workflows/ubuntu_action_test.yml/badge.svg)](https://github.com/GuillaumeFalourd/copy-push-files/actions/workflows/ubuntu_action_test.yml)
 
-GitHub Action to copy & push contents (files / directory) from a repository to another :octocat:
+☞ GitHub Action to copy & push contents (files / directory) from a repository to another :octocat:
 
 _**Note**: This action is supported on **all runners** operating systems (`ubuntu`, `macos`, `windows`)_
 
@@ -39,7 +39,7 @@ _**Note**: This action is supported on **all runners** operating systems (`ubunt
           name: ${{ github.actor }}
           commit_message: your_message
           target_branch: branch_name
-          source_files: file1.txt file2.txt dir1 dir2
+          source_files: file1 file2 directory1 directory2/file3
           remote_repository: https://github.com/<owner>/<repo> # public repository
           access_token: ${{ github.token }} # need PAT if private repo
 ```
@@ -56,7 +56,7 @@ Field | Mandatory | Default Value | Observation
 **target_branch** | YES | `copy-push-files-branch` | Branch to push the contents on the other repository
 **target_dir** | YES | `repository root` | Directory to push the contents on the other repository
 **source_files** | YES | `.` | Files to add separated by space <br/> _e.g: `file1 file2 directory1 directory2/file3`_
-**remote_repository** | NO | `-` | Repository url to push the code <br/> _e.g: `https://github.com/<owner>/<repo>`_
+**remote_repository** | YES | N/A | Repository url to push the code <br/> _e.g: `https://github.com/<owner>/<repo>`_
 **access_token** | NO | `${{ github.token }}` | [Personal Access Token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token) is necessary if push to another repository
 
 * * *
