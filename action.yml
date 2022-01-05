@@ -38,12 +38,9 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2.3.4
-
     - name: Copy contents from current repository to destination Github repository
       run: |
-        REGEX=`^(https|git)(:\/\/|@)([^\/:]+)[\/:]([^\/:]+)\/(.+).git$`
+        REGEX="^(https|git)(:\/\/|@)([^\/:]+)[\/:]([^\/:]+)\/(.+).git$"
 
         if [[ ${{ inputs.remote_repository }} =~ $REGEX ]]; then
             PROTOCOL=${BASH_REMATCH[1]}
