@@ -1,8 +1,8 @@
 # Copy & Push Files action
 
-[![Security Pipeline](https://github.com/GuillaumeFalourd/copy-push-files/actions/workflows/security-pipeline.yml/badge.svg)](https://github.com/GuillaumeFalourd/copy-push-files/actions/workflows/security-pipeline.yml) [![Gitleaks](https://github.com/GuillaumeFalourd/copy-push-files/actions/workflows/gitleaks.yml/badge.svg)](https://github.com/GuillaumeFalourd/copy-push-files/actions/workflows/gitleaks.yml)
+[![Action test on Ubuntu](https://github.com/GuillaumeFalourd/copy-push-files/actions/workflows/ubuntu_action_test.yml/badge.svg)](https://github.com/GuillaumeFalourd/copy-push-files/actions/workflows/ubuntu_action_test.yml) [![Action test on MacOS](https://github.com/GuillaumeFalourd/copy-push-files/actions/workflows/macos-action-test.yml/badge.svg)](https://github.com/GuillaumeFalourd/copy-push-files/actions/workflows/macos-action-test.yml) [![Action test on Windows](https://github.com/GuillaumeFalourd/copy-push-files/actions/workflows/windows-action-test.yml/badge.svg)](https://github.com/GuillaumeFalourd/copy-push-files/actions/workflows/windows-action-test.yml)
 
-[![Action test on Ubuntu](https://github.com/GuillaumeFalourd/copy-push-files/actions/workflows/ubuntu_action_test.yml/badge.svg)](https://github.com/GuillaumeFalourd/copy-push-files/actions/workflows/ubuntu_action_test.yml)
+[![Security Pipeline](https://github.com/GuillaumeFalourd/copy-push-files/actions/workflows/security-pipeline.yml/badge.svg)](https://github.com/GuillaumeFalourd/copy-push-files/actions/workflows/security-pipeline.yml) [![Gitleaks](https://github.com/GuillaumeFalourd/copy-push-files/actions/workflows/gitleaks.yml/badge.svg)](https://github.com/GuillaumeFalourd/copy-push-files/actions/workflows/gitleaks.yml)
 
 ☞ GitHub Action to copy & push contents (files / directory) from a repository to another :octocat:
 
@@ -23,9 +23,9 @@ _**Note**: This action is supported on **all runners** operating systems (`ubunt
 ```yaml
     steps:
       - uses: actions/checkout@v2.3.4
-      # [...] --> steps with actions or commands updating repository files
       - uses: GuillaumeFalourd/copy-push-files@v1
         with:
+          source_files: file1 file2 directory1 directory2/file3
           remote_repository: https://github.com/<owner>/<repo>
           access_token: ${{ secrets.ACCESS_TOKEN }}
 ```
@@ -35,7 +35,6 @@ _**Note**: This action is supported on **all runners** operating systems (`ubunt
 ```yaml
     steps:
       - uses: actions/checkout@v2.3.4
-      # [...] --> steps with actions or commands updating repository files
       - uses: GuillaumeFalourd/copy-push-files@v1
         with:
           email: ${{ github.actor }}[bot]@users.noreply.github.com
