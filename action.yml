@@ -24,7 +24,7 @@ inputs:
     default: 'copy-push-files-branch'
   target_dir:
     description: Directory to push the contents to on the new repository
-    required: true
+    required: false
   remote_repository:
     description: Repository url to push the code to
     required: true
@@ -75,11 +75,17 @@ runs:
 
             cd "$CLONE_DIRECTORY"
 
-            # Create new branch
+            # Create new branch (if necessary)
             REMOTE_URL=https://$DESTINATION_OWNER:${{ inputs.access_token }}@github.com/$DESTINATION_OWNER/$DESTINATION_REPOSITORY
             git remote set-url origin $REMOTE_URL
             git fetch origin
-            git checkout -b ${{ inputs.target_branch }}
+            BE=$(git ls-remote --heads origin ${{ inputs.target_branch }} | wc -l)
+            if [[ $BE == *"0"* ]]; then
+              echo "##### Target branch doesn't exist. Creating new branch #####"
+              git checkout -b ${{ inputs.target_branch }}
+            else
+              git checkout ${{ inputs.target_branch }}
+            fi
             git add .
             git status
 
@@ -88,7 +94,6 @@ runs:
 
             echo
             echo "##### Pushing git commit #####"
-            # --set-upstream: sets the branch when pushing to a branch that does not exist
             git push -f -u origin "${{ inputs.target_branch }}"
 
         else
