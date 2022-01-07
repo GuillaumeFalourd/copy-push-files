@@ -72,7 +72,7 @@ runs:
               cp -rvf ${{ inputs.source_files }} $CLONE_DIRECTORY
             else
               mkdir -p "$CLONE_DIRECTORY/${{ inputs.target_dir }}"
-              cp -rvf ${{ inputs.source_files }" $CLONE_DIRECTORY/${{ inputs.target_dir }}
+              cp -rvf ${{ inputs.source_files }} $CLONE_DIRECTORY/${{ inputs.target_dir }}
             fi
 
             cd "$CLONE_DIRECTORY"
