@@ -69,10 +69,10 @@ runs:
             echo
             echo "##### Copying contents to destination Github repository #####"
             if [ -z "${{ inputs.target_dir }}" ]; then
-              cp -rvf "${{ inputs.source_files }}" "$CLONE_DIRECTORY"
+              cp -rvf ${{ inputs.source_files }} $CLONE_DIRECTORY
             else
               mkdir -p "$CLONE_DIRECTORY/${{ inputs.target_dir }}"
-              cp -rvf "${{ inputs.source_files }}" "$CLONE_DIRECTORY/${{ inputs.target_dir }}"
+              cp -rvf ${{ inputs.source_files }" $CLONE_DIRECTORY/${{ inputs.target_dir }}
             fi
 
             cd "$CLONE_DIRECTORY"
@@ -82,9 +82,9 @@ runs:
             git fetch origin
 
             if [ -z "${{ inputs.target_dir }}" ]; then
-              git add ${{ inputs.source_files }}
+              git add --all
             else
-              git add ${{ inputs.target_dir }}/${{ inputs.source_files }}
+              git add ${{ inputs.target_dir }}/
             fi
             # Won't commit if no changes were made
             git diff-index --quiet HEAD || git commit --message "${{ inputs.commit_message }}"
