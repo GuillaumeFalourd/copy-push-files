@@ -74,6 +74,7 @@ runs:
             fi
 
             cd "$CLONE_DIRECTORY"
+            ls -lha
 
             # Create new branch (if necessary)
             REMOTE_URL=https://$DESTINATION_OWNER:${{ inputs.access_token }}@github.com/$DESTINATION_OWNER/$DESTINATION_REPOSITORY
@@ -86,7 +87,7 @@ runs:
             else
               git checkout -f ${{ inputs.target_branch }}
             fi
-            git status
+            ls -lha
             if [ -z "${{ inputs.target_dir }}" ]; then
               git add ${{ inputs.source_files }}
             else
