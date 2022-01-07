@@ -86,6 +86,7 @@ runs:
             else
               git checkout -f ${{ inputs.target_branch }}
             fi
+            git status
             if [ -z "${{ inputs.target_dir }}" ]; then
               git add ${{ inputs.source_files }}
             else
