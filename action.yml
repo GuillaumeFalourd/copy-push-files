@@ -75,7 +75,6 @@ runs:
 
             cd "$CLONE_DIRECTORY"
 
-            # Create new branch (if necessary)
             REMOTE_URL=https://$DESTINATION_OWNER:${{ inputs.access_token }}@github.com/$DESTINATION_OWNER/$DESTINATION_REPOSITORY
             git remote set-url origin $REMOTE_URL
             git fetch origin
@@ -90,6 +89,7 @@ runs:
             git status
             git branch copy-push-files-action-${{ github.run_id }}-${{ github.job }}
 
+            # Create new branch (if necessary)
             BE=$(git ls-remote --heads origin ${{ inputs.target_branch }} | wc -l)
             if [[ $BE == *"0"* ]]; then
               echo "##### Target branch doesn't exist. Creating new branch #####"
