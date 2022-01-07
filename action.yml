@@ -97,7 +97,7 @@ runs:
             else
               git checkout ${{ inputs.target_branch }}
             fi
-            git merge -X ours copy-push-files-action-${{ github.run_id }}-${{ github.job }}
+            git merge -X theirs copy-push-files-action-${{ github.run_id }}-${{ github.job }}
             git branch -d copy-push-files-action-${{ github.run_id }}-${{ github.job }}
 
             echo
