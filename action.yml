@@ -83,9 +83,9 @@ runs:
             BE=$(git ls-remote --heads origin ${{ inputs.target_branch }} | wc -l)
             if [[ $BE == *"0"* ]]; then
               echo "##### Target branch doesn't exist. Creating new branch #####"
-              git checkout -b ${{ inputs.target_branch }}
+              git checkout -f -b ${{ inputs.target_branch }}
             else
-              git checkout ${{ inputs.target_branch }}
+              git checkout -f ${{ inputs.target_branch }}
             fi
             git add .
             git status
