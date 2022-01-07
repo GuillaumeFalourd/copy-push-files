@@ -84,7 +84,7 @@ runs:
               echo "##### Target branch doesn't exist. Creating new branch #####"
               git checkout -b ${{ inputs.target_branch }}
             else
-              git merge origin ${{ inputs.target_branch }}
+              git merge origin/${{ inputs.target_branch }}
             fi
             if [ -z "${{ inputs.target_dir }}" ]; then
               git add ${{ inputs.source_files }}
