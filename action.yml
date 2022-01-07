@@ -79,12 +79,13 @@ runs:
             REMOTE_URL=https://$DESTINATION_OWNER:${{ inputs.access_token }}@github.com/$DESTINATION_OWNER/$DESTINATION_REPOSITORY
             git remote set-url origin $REMOTE_URL
             git fetch origin
+            git rm --cached
             BE=$(git ls-remote --heads origin ${{ inputs.target_branch }} | wc -l)
             if [[ $BE == *"0"* ]]; then
               echo "##### Target branch doesn't exist. Creating new branch #####"
-              git checkout -f -b ${{ inputs.target_branch }}
+              git checkout -b ${{ inputs.target_branch }}
             else
-              git checkout -f ${{ inputs.target_branch }}
+              git checkout ${{ inputs.target_branch }}
             fi
             git add .
             git status
