@@ -79,22 +79,26 @@ runs:
             REMOTE_URL=https://$DESTINATION_OWNER:${{ inputs.access_token }}@github.com/$DESTINATION_OWNER/$DESTINATION_REPOSITORY
             git remote set-url origin $REMOTE_URL
             git fetch origin
-            BE=$(git ls-remote --heads origin ${{ inputs.target_branch }} | wc -l)
-            if [[ $BE == *"0"* ]]; then
-              echo "##### Target branch doesn't exist. Creating new branch #####"
-              git checkout -b ${{ inputs.target_branch }}
-            else
-              git switch ${{ inputs.target_branch }}
-            fi
+
             if [ -z "${{ inputs.target_dir }}" ]; then
               git add ${{ inputs.source_files }}
             else
               git add ${{ inputs.target_dir }}/${{ inputs.source_files }}
             fi
-            git status
-
             # Won't commit if no changes were made
             git diff-index --quiet HEAD || git commit --message "${{ inputs.commit_message }}"
+            git status
+            git branch copy-push-files-action-${{ github.run_id }}-${{ github.job }}
+
+            BE=$(git ls-remote --heads origin ${{ inputs.target_branch }} | wc -l)
+            if [[ $BE == *"0"* ]]; then
+              echo "##### Target branch doesn't exist. Creating new branch #####"
+              git checkout -b ${{ inputs.target_branch }}
+            else
+              git checkout ${{ inputs.target_branch }}
+            fi
+            git merge copy-push-files-action-${{ github.run_id }}-${{ github.job }}
+            git branch -d copy-push-files-action-${{ github.run_id }}-${{ github.job }}
 
             echo
             echo "##### Pushing git commit #####"
