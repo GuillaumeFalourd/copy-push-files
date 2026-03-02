@@ -65,7 +65,11 @@ runs:
             git config --global user.name "${{ inputs.name }}"
             EXTRAHEADERS=$(git config -l | grep 'http\..*\.extraheader' | cut -d= -f1)
             if [[ -n "$EXTRAHEADERS" ]]; then
-              echo "$EXTRAHEADERS" | xargs -L1 git config --unset-all
+              for key in $EXTRAHEADERS; do
+                if git config --get "$key" >/dev/null; then
+                  git config --unset-all "$key"
+                fi
+              done
             fi
             git clone "https://${{ inputs.access_token }}@github.com/$DESTINATION_OWNER/$DESTINATION_REPOSITORY.git" "$CLONE_DIRECTORY"
             if [ $? -ne 0 ]; then 
