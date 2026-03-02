@@ -65,6 +65,9 @@ runs:
             git config --global user.name "${{ inputs.name }}"
             git config -l | grep 'http\..*\.extraheader' | cut -d= -f1 | xargs -L1 git config --unset-all
             git clone "https://${{ inputs.access_token }}@github.com/$DESTINATION_OWNER/$DESTINATION_REPOSITORY.git" "$CLONE_DIRECTORY"
+            if [ $? -ne 0 ]; then 
+              echo "git clone failed with code $?"; 
+            fi
             ls -la "$CLONE_DIRECTORY"
 
             echo
