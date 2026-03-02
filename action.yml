@@ -63,7 +63,10 @@ runs:
             # Setup git
             git config --global user.email "${{ inputs.email }}"
             git config --global user.name "${{ inputs.name }}"
-            git config -l | grep 'http\..*\.extraheader' | cut -d= -f1 | xargs -r -L1 git config --unset-all
+            EXTRAHEADERS=$(git config -l | grep 'http\..*\.extraheader' | cut -d= -f1)
+            if [[ -n "$EXTRAHEADERS" ]]; then
+              echo "$EXTRAHEADERS" | xargs -L1 git config --unset-all
+            fi
             git clone "https://${{ inputs.access_token }}@github.com/$DESTINATION_OWNER/$DESTINATION_REPOSITORY.git" "$CLONE_DIRECTORY"
             if [ $? -ne 0 ]; then 
               echo "git clone failed with code $?"; 
