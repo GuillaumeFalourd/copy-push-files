@@ -24,8 +24,8 @@ _**Note**: This action is supported on **all runners** operating systems (`ubunt
 
 ```yaml
     steps:
-      - uses: actions/checkout@v2.3.4
-      - uses: GuillaumeFalourd/copy-push-files@v1
+      - uses: actions/checkout@v6
+      - uses: GuillaumeFalourd/copy-push-files@v2
         with:
           source_files: file1 file2 directory1 directory2/file3
           remote_repository: https://github.com/<owner>/<repo>
@@ -36,8 +36,8 @@ _**Note**: This action is supported on **all runners** operating systems (`ubunt
 
 ```yaml
     steps:
-      - uses: actions/checkout@v2.3.4
-      - uses: GuillaumeFalourd/copy-push-files@v1
+      - uses: actions/checkout@v6
+      - uses: GuillaumeFalourd/copy-push-files@v2
         with:
           email: ${{ github.actor }}[bot]@users.noreply.github.com
           name: ${{ github.actor }}
