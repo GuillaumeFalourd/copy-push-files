@@ -2,7 +2,7 @@
 
 [![Action test on Ubuntu](https://github.com/GuillaumeFalourd/copy-push-files/actions/workflows/ubuntu-action-test.yml/badge.svg)](https://github.com/GuillaumeFalourd/copy-push-files/actions/workflows/ubuntu-action-test.yml) [![Action test on MacOS](https://github.com/GuillaumeFalourd/copy-push-files/actions/workflows/macos-action-test.yml/badge.svg)](https://github.com/GuillaumeFalourd/copy-push-files/actions/workflows/macos-action-test.yml) [![Action test on Windows](https://github.com/GuillaumeFalourd/copy-push-files/actions/workflows/windows-action-test.yml/badge.svg)](https://github.com/GuillaumeFalourd/copy-push-files/actions/workflows/windows-action-test.yml)
 
-[![Security Pipeline](https://github.com/GuillaumeFalourd/copy-push-files/actions/workflows/security-pipeline.yml/badge.svg)](https://github.com/GuillaumeFalourd/copy-push-files/actions/workflows/security-pipeline.yml) [![Gitleaks](https://github.com/GuillaumeFalourd/copy-push-files/actions/workflows/gitleaks.yml/badge.svg)](https://github.com/GuillaumeFalourd/copy-push-files/actions/workflows/gitleaks.yml)
+[![Gitleaks](https://github.com/GuillaumeFalourd/copy-push-files/actions/workflows/gitleaks.yml/badge.svg)](https://github.com/GuillaumeFalourd/copy-push-files/actions/workflows/gitleaks.yml)
 
 ![](https://user-images.githubusercontent.com/22433243/148292745-102e17fe-9277-46e9-ab52-468be5cf3240.png)
 
